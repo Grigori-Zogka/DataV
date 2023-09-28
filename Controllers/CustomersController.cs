@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataV.Models;
+using System.Runtime.Intrinsics.Arm;
 
 namespace DataV.Controllers
 {
@@ -129,6 +130,9 @@ namespace DataV.Controllers
 
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(m => m.Id == id);
+
+            
+
             if (customer == null)
             {
                 return NotFound();
@@ -149,7 +153,9 @@ namespace DataV.Controllers
             var customer = await _context.Customers.FindAsync(id);
             if (customer != null)
             {
-                _context.Customers.Remove(customer);
+                //Stored prcedure to delete aan entry based on ID
+                //_context.Database.ExecuteSqlRaw(string.Format("DELETE FROM imp.[DgPlanningData] WHERE id='{0}' ", id));
+               _context.Customers.Remove(customer);
             }
             
             await _context.SaveChangesAsync();
