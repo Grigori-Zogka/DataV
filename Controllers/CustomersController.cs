@@ -21,9 +21,11 @@ namespace DataV.Controllers
         // GET: Customers
         public async Task<IActionResult> Index()
         {
-              return _context.Customers != null ? 
-                          View(await _context.Customers.ToListAsync()) :
-                          Problem("Entity set 'CustomerContext.Customers'  is null.");
+            return _context.Customers != null ?
+                       View(await _context.Customers.ToListAsync()) :
+                        Problem("Entity set 'CustomerContext.Customers'  is null.");
+
+           
         }
 
         // GET: Customers/Details/5

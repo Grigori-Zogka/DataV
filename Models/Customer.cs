@@ -8,11 +8,11 @@ namespace DataV.Models
         [Key]
         public int Id { get; set; }
 
-        [Required]
         [Column(TypeName = "varchar(100)")]
+        [Required(ErrorMessage = "Please Enter a valid Name")]
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Please Enter a valid Name")]
+        
         [Column(TypeName = "int")]
         [Range(18, 120, ErrorMessage = "Customer must be an adult")]
         public int Age { get; set; }

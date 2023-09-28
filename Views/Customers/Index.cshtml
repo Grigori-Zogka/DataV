@@ -4,12 +4,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1 class="text-center"><i class="fas fa-cog fa-spin"></i>Customer Overview</h1>
+<br />
+<br />
+<br />
+<br />
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<table class="table"> 
     <thead>
         <tr>
             <th>
@@ -27,10 +28,16 @@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
-            <th></th>
+            <th>
+               
+                Actions
+            </th>
+           
         </tr>
     </thead>
     <tbody>
+
+       
 @foreach (var item in Model) {
         <tr>
             <td>
@@ -57,3 +64,7 @@
 }
     </tbody>
 </table>
+<br />
+<br />
+<a onclick="showInPopup('@Url.Action("Create","Customers",null, Context.Request.Scheme)','New Customer')=''" class="btn-group-lg">Create New</a>
+<p> <a asp-action="Create">Create New</a></p>
