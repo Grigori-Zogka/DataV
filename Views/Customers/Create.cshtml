@@ -4,6 +4,11 @@
     ViewData["Title"] = "Create";
 }
 
+
+@{
+    Layout = "";
+}
+
 <h1>Create</h1>
 
 <h4>Customer</h4>
@@ -37,12 +42,14 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+            <br />
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary btn-block" />
             </div>
         </form>
     </div>
 </div>
+<br />
 
 <div>
     <a asp-action="Index">Back to List</a>

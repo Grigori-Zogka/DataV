@@ -4,13 +4,125 @@
     ViewData["Title"] = "Index";
 }
 
-<div id="view-all">
-    @await Html.PartialAsync("_ViewAll", Model)
+
+
+
+
+
+
+
+
+<h1 class="text-center"><i class="fas fa-cog fa-spin"></i>Customer Overview</h1>
+<br />
+<br />
+<br />
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+
+                Actions
+            </th>
+
+        </tr>
+    </thead>
+    <tbody>
+
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PhoneNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
+                    <a onclick="showInPopup('@Url.Action("Edit","Customers",new {id=item.Id}, Context.Request.Scheme)','Customer Details')=''" class="btn-group-lg">Edit</a>  |
+                    <a onclick="showInPopup('@Url.Action("Details","Customers",new {id=item.Id}, Context.Request.Scheme)','Customer Details')=''" class="btn-group-lg">Details</a>  |
+                    <a onclick="showInPopup('@Url.Action("Delete","Customers",new {id=item.Id}, Context.Request.Scheme)','Customer Details')=''" class="btn-group-lg">Delete</a>  |
+                  @*  <a asp-action="Details" asp-route-id="@item.Id">Details</a> |*@
+                   @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>*@
+                   
+                </td>
+               
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Delete Employee</h3>
+            </div>
+            <div class="modal-body">
+                <h4>Are you sure you want to Remove this Employee?</h4>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-success" onclick="DeleteEmployee()">Confirm</a>
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
 
-@section Scripts{
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-}
 
+
+<div id="id01" class="modal">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+    <form class="modal-content" action="/action_page.php">
+        <div class="container">
+            <h1>Delete Account</h1>
+            <p>Are you sure you want to delete your account?</p>
+
+            <div class="clearfix">
+                <button type="button" class="cancelbtn">Cancel</button>
+                <button type="button" class="deletebtn">Delete</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<br />
+<br />
+<a  onclick="showInPopup('@Url.Action("Create","Customers",null, Context.Request.Scheme)','New Customer')=''" class="btn-group-lg">Create New</a>
+<p> <a asp-action="Create">Create New</a></p>

@@ -4,6 +4,11 @@
     ViewData["Title"] = "Edit";
 }
 
+@{
+    Layout = "";
+}
+
+
 <h1>Edit</h1>
 
 <h4>Customer</h4>
@@ -38,6 +43,8 @@
                 <input asp-for="Email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
+           
+            <br />
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
@@ -45,10 +52,12 @@
     </div>
 </div>
 
+<br />
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
 
+<br />
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
