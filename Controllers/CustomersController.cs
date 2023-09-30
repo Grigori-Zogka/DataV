@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using DataV.Models;
 using System.Runtime.Intrinsics.Arm;
+using System.Drawing;
 
 namespace DataV.Controllers
 {
@@ -23,11 +24,11 @@ namespace DataV.Controllers
         public async Task<IActionResult> Index()
         {
             return _context.Customers != null ?
-                
+
                        View(await _context.Customers.ToListAsync()) :
                         Problem("Entity set 'CustomerContext.Customers'  is null.");
 
-           
+
         }
 
         // GET: Customers/Details/5
@@ -40,6 +41,17 @@ namespace DataV.Controllers
 
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(m => m.Id == id);
+            //Stored prcedure to delete an entry based on ID
+            ////CREATE PROCEDURE[dbo].[SelectCustomerOnId]
+            ////@ID int
+            ////AS
+            ////BEGIN
+
+            ////SET NOCOUNT ON;
+            ////SELECT* from Customers WHERE Id = @ID
+
+            //var customer =  _context.Database.ExecuteSqlRaw(string.Format("EXECUTE [dbo].[SelectCustomerOnId] id='{0}' ", id));
+
             if (customer == null)
             {
                 return NotFound();
@@ -128,7 +140,7 @@ namespace DataV.Controllers
             var customer = await _context.Customers
                 .FirstOrDefaultAsync(m => m.Id == id);
 
-            
+
 
             if (customer == null)
             {
@@ -150,18 +162,31 @@ namespace DataV.Controllers
             var customer = await _context.Customers.FindAsync(id);
             if (customer != null)
             {
-                //Stored prcedure to delete aan entry based on ID
-                //_context.Database.ExecuteSqlRaw(string.Format("DELETE FROM imp.[DgPlanningData] WHERE id='{0}' ", id));
-               _context.Customers.Remove(customer);
+                //sql query to delete an entry based on ID
+                //_context.Database.ExecuteSqlRaw(string.Format("DELETE FROM [dbo].[Customers] WHERE id='{0}' ", id));
+
+                //Stored prcedure to delete an entry based on ID
+
+                //////                CREATE PROCEDURE[dbo].[DeleteCustomer]
+                //////                @ID int
+                //////                  AS
+                //////                  BEGIN
+                //////               SET NOCOUNT ON;
+                //////                Delete from Customers where Id = @ID
+                //////                  END
+                //                   GO
+                //_context.Database.ExecuteSqlRaw(string.Format("EXECUTE [dbo].[DeleteCustomer] id='{0}' ", id));
+
+                _context.Customers.Remove(customer);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CustomerExists(int id)
         {
-          return (_context.Customers?.Any(e => e.Id == id)).GetValueOrDefault();
+            return (_context.Customers?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

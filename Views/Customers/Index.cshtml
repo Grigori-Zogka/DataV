@@ -81,48 +81,7 @@
 
 
 
-<div class="modal fade" id="myModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <a href="#" class="close" data-dismiss="modal">&times;</a>
-                <h3 class="modal-title">Delete Employee</h3>
-            </div>
-            <div class="modal-body">
-                <h4>Are you sure you want to Remove this Employee?</h4>
-
-
-
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
-                <a href="#" class="btn btn-success" onclick="DeleteEmployee()">Confirm</a>
-            </div>
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<div id="id01" class="modal">
-    <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-    <form class="modal-content" action="/action_page.php">
-        <div class="container">
-            <h1>Delete Account</h1>
-            <p>Are you sure you want to delete your account?</p>
-
-            <div class="clearfix">
-                <button type="button" class="cancelbtn">Cancel</button>
-                <button type="button" class="deletebtn">Delete</button>
-            </div>
-        </div>
-    </form>
-</div>
-
 <br />
 <br />
-<a  onclick="showInPopup('@Url.Action("Create","Customers",null, Context.Request.Scheme)','New Customer')=''" class="btn-group-lg">Create New</a>
-<p> <a asp-action="Create">Create New</a></p>
+<button type="button" onclick="showInPopup('@Url.Action("Create","Customers",null, Context.Request.Scheme)','New Customer')=''" class="btn btn-primary  btn-lg-Info">Create New</button>
+@* <p> <a asp-action="Create">Create New</a></p> *@
